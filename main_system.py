@@ -5,7 +5,11 @@ import cv2
 import time
 import winsound
 import qrcode
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from PIL import Image
+import datetime
 # カメラデバイス取得
 cap = cv2.VideoCapture(0)
 # QRCodeDetectorを生成
@@ -29,6 +33,32 @@ time_to_wait = 3  #新規の読み込み間隔を３秒に設定。
 frequency = 2000  # 周波数 (Hz)
 duration = 500  # 持続時間 (ミリ秒)
 
+def message_send(mailadress,name,status):
+    dt_now = datetime.datetime.now()
+    receiver_email = mailadress
+    sender_email = "bunnun.login.system202@gmail.com"
+    password = "jrauylrbzghybesp"  # 通常のパスワードを使用
+    subject = "書道教室文運ログインシステム"
+    body = "{}年{}月{}日{}時{}分にお子様が{}しました".format(dt_now.year,dt_now.month,dt_now.day,dt_now.hour,dt_now.minute,status)
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = receiver_email
+    msg['Subject'] = subject
+    msg.attach(MIMEText(body, 'plain'))
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()  # TLS（Transport Layer Security）を開始
+        server.login(sender_email, password)
+        text = msg.as_string()
+        server.sendmail(sender_email, receiver_email, text)
+        print("Email sent successfully")
+    except Exception as e:
+        print(f"Failed to send email: {e}")
+    finally:
+        server.quit()
+    
+
+
 
 while True:
     ret, frame = cap.read()
@@ -50,11 +80,13 @@ while True:
             if login_status == 0:
                 data_file.loc[data_file["id"] == checking_id, "login_status"] = 1
                 winsound.Beep(frequency, duration)#音を出力
+                message_send(login_mailadress,login_name,"入室")
                 #入室時の処理
 
             elif login_status == 1:
                 data_file.loc[data_file["id"] == checking_id, "login_status"] = 0
                 winsound.Beep(frequency, duration)#音を出力
+                message_send(login_mailadress,login_name,"退室")
                 #退出時の処理の処理
                 
             #処理内容をもとのｃｓｖファイルに反映
