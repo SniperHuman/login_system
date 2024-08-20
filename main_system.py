@@ -61,7 +61,11 @@ while True:
             data_file.to_csv('costumer_info.csv',index=False)
             time.sleep(time_to_wait)#一瞬に入室と退出を繰り返さないように猶予の時間を設定。
     
-    if cv2.waitKey(1) & 0xFF == ord('q'):#press q to  quit 
+    if cv2.waitKey(1) & 0xFF == ord('q'): #press q to  quit 
+        for x in ids:
+           data_file.loc[data_file["id"] == x, "login_status"] = 0 #  システム終了時のログイン状況の初期化
+           #処理内容をもとのｃｓｖファイルに反映
+           data_file.to_csv('costumer_info.csv',index=False)
         break
     
      
