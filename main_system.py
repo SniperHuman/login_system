@@ -60,12 +60,7 @@ while True:
 
 
     cv2.imshow('Login_system', frame)#画像を出力
-    
-<<<<<<< HEAD
     if cv2.waitKey(1) & 0xFF == ord('q'):#press q to  quit
-=======
-    if cv2.waitKey(1) & 0xFF == ord('q'):#press q to  quit 
->>>>>>> 723ff27b456fb4c9e2b32a9a24da5bc713da23ae
         for x in ids:
             data_file.loc[data_file["id"] == x, "login_status"] = 0
         break
