@@ -25,7 +25,6 @@ for i in range(len(names)):
     img.save(names[i]+'.png')
     #IDをQRコードに紐づけ、作成。そして保存。
 
-people_attend = []
 time_to_wait = 3  #新規の読み込み間隔を３秒に設定。
 frequency = 2000  # 周波数 (Hz)
 duration = 500  # 持続時間 (ミリ秒)
@@ -46,17 +45,11 @@ while True:
             #ログインしている人の名前、id、メールアドレスを一時的に変数に格納。
 
         if login_status == 0:
-            people_attend.append(login_name)
             data_file.loc[data_file["id"] == cheking_id, "login_status"] = 1
             winsound.Beep(frequency, duration)#音を出力
             #入室時の処理
 
         elif login_status == 1:
-            try:
-                people_attend.remove(login_name)
-            except:
-                pass
-            #システムを再起動したときにpeopleattendリストが空になってしまうときの例外を一時的に無視。
             data_file.loc[data_file["id"] == cheking_id, "login_status"] = 0
             winsound.Beep(frequency, duration)#音を出力
             #退出時の処理の処理
@@ -69,6 +62,8 @@ while True:
     cv2.imshow('Login_system', frame)#画像を出力
     
     if cv2.waitKey(1) & 0xFF == ord('q'):#press q to  quit 
+        for x in ids:
+            data_file.loc[data_file["id"] == x, "login_status"] = 0
         break
     
      
