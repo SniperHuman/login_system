@@ -3,12 +3,12 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 # メールの送信者と受信者の情報
-receiver_email = "Sniper.Human0713@gmail.com"
-sender_email = "spider0713@icloud.com"
-password = "Takahiro713"  # 通常のパスワードを使用
+receiver_email = "spider0713@icloud.com"
+sender_email = "bunnun.login.system202@gmail.com"
+password = "jrauylrbzghybesp"  # 通常のパスワードを使用
 
 # メールの内容を設定
-subject = "Test Email"
+subject = "書道教室文運ログインシステム"
 body = "This is a test email sent from Python."
 
 # メールのメッセージを作成
