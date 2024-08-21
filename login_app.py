@@ -4,6 +4,7 @@ from tkinter import messagebox as mbox
 import csv
 import numpy as np
 import pandas as pd
+import qrcode
 
 
 pd.set_option("display.max_columns",None)
@@ -43,6 +44,14 @@ def register():
         new_row = {"id":int(ids[-1])+1,"name":name_get,"mail_adress":email_get,"login_status":0}
         data_file.loc[len(data_file)] = new_row
         data_file.to_csv('costumer_info.csv',index=False)
+        names.append(name_get)
+        ids.append(int(ids[-1])+1)
+        mailadress.append(email_get)
+        login_status.append(0)
+        for i in range(len(names)):
+            img = qrcode.make(ids[i])
+            img.save(names[i]+'.png')
+        #ｑｒコードを作成する
         message = tk.Label(window, text="登録完了です。")
         message.pack()
         
