@@ -28,6 +28,13 @@ for i in range(len(names)):
     img = qrcode.make(ids[i])
     img.save(names[i]+'.png')
     #IDをQRコードに紐づけ、作成。そして保存。
+    
+people_now = []
+for i in range(len(names)):
+    if data_file[data_file["names"] == names[i]].loc[i,"login_status"] == 1:
+        people_now.append(names[i])
+    #ファイルのLOGUINSTATUSが１の人をリストに追加.
+    
 
 time_to_wait = 3  #新規の読み込み間隔を３秒に設定。
 frequency = 2000  # 周波数 (Hz)
@@ -65,7 +72,6 @@ while True:
     cv2.imshow('Login_system', frame)#画像を出力
     try:
         data = detector.detectAndDecode(frame)#データの読み込み、qrコードで読み取ったiDをリストで返す。
-        print(data[0])
     except:
         pass
     if data[0].isdecimal():#数であるかを判定する、本来QRコードは数字をデータとして持つように作成したが、万が一別のQRコードを読み込んだ時の動作不良をなくすために入れる。
