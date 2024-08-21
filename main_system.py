@@ -32,6 +32,10 @@ for i in range(len(names)):
 time_to_wait = 3  #新規の読み込み間隔を３秒に設定。
 frequency = 2000  # 周波数 (Hz)
 duration = 500  # 持続時間 (ミリ秒)
+people_now = []
+for i in range(len(ids)):
+    if data_file[data_file["id"] ==ids[i]].loc[ids.index(ids[i]),"login_status"] ==1:
+        people_now.append(names[i])
 
 def message_send(mailadress,name,status):
     dt_now = datetime.datetime.now()
