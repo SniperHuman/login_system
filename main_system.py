@@ -66,11 +66,11 @@ def message_send(mailadress,name,status):
 
 while True:
     ret, frame = cap.read()
-    cv2.imshow('Login_system', frame)#画像を出力
     try:
         data = detector.detectAndDecode(frame)#データの読み込み、qrコードで読み取ったiDをリストで返す。
     except:
         pass
+    cv2.imshow('Login_system', frame)#画像を出力
     if data[0].isdecimal():#数であるかを判定する、本来QRコードは数字をデータとして持つように作成したが、万が一別のQRコードを読み込んだ時の動作不良をなくすために入れる。
         if data[0] != "" and int(data[0]) in ids:  #何かしらのデータがヒットした時
             checking_id = int(data[0])

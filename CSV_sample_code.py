@@ -10,7 +10,7 @@ working = True
 people_attend = []
 print(people_attend)
 while working:
-    checking_number = 1123
+    checking_number = 1001
     try:
         checking_person_mail_adress = data_file[data_file["number"] ==checking_number].loc[0,"mail_adress"]
         checking_person_name = data_file[data_file["number"] ==checking_number].loc[0,"name"]

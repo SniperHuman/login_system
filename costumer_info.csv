@@ -1,3 +1,4 @@
-id,name,mail_adress,age,login_status
-1123,suzukitarou,Sniper.Human0713@gmail.com,15,0
-1124,kanekotakahiro,spider0713@icloud.com,14,0
+id,name,mail_adress,login_status
+1001,鈴木太郎,Sniper.Human0713@gmail.com,0
+1002,金子昂弘,spider0713@icloud.com,0
+1003,論理,spider0713@icloud.com,0
