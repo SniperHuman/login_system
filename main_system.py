@@ -43,7 +43,7 @@ def message_send(mailadress,name,status):
     sender_email = "bunnun.login.system202@gmail.com"
     password = "jrauylrbzghybesp"  # 通常のパスワードを使用
     subject = "書道教室文運ログインシステム"
-    body = "{}年{}月{}日{}時{}分に`{}さんが{}しました".format(dt_now.year,dt_now.month,dt_now.day,dt_now.hour,dt_now.minute,name,status)
+    body = "{}年{}月{}日{}時{}分に{}さんが{}しました".format(dt_now.year,dt_now.month,dt_now.day,dt_now.hour,dt_now.minute,name,status)
     msg = MIMEMultipart()
     msg['From'] = sender_email
     msg['To'] = receiver_email
