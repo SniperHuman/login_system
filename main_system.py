@@ -28,6 +28,12 @@ for i in range(len(names)):
     img = qrcode.make(ids[i])
     img.save(names[i]+'.png')
     #IDをQRコードに紐づけ、作成。そして保存。
+    
+people_now = []
+for i in range(len(names)):
+    if data_file[data_file["names"] == names[i]].loc[i,"login_status"] == 1:
+        people_now.append(names[i])
+    #ファイルのLOGUINSTATUSが１の人をリストに追加.
 
 time_to_wait = 3  #新規の読み込み間隔を３秒に設定。
 frequency = 2000  # 周波数 (Hz)
